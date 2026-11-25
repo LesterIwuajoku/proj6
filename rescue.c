@@ -62,7 +62,7 @@ void* studentBehavior(void* arg) {
    sem_post(&studentsEntered);
    sem_wait(&studentDone[studentID - 1]);
 
-   printf("Student %d says , \" Thank you , tutor ! \"\n", studentID);
+   printf("Student %d says , \" Time to go ! \"\n", studentID);
 
    return NULL;
 
@@ -72,7 +72,7 @@ void* studentBehavior(void* arg) {
 
 void* tutor_behavior(void* arg) {
     int numSeats = *((int*)arg);
-    printf("Tutor says , \"I m beginning my workday , there are %d seats . \"\n", numSeats);
+    printf("Tutor says , \"I'm beginning my workday , there are %d seats . \"\n", numSeats);
     while(1) {
         sem_wait(&remainingStudentsMutex);
        if(isWorkdayEnded) {
@@ -114,7 +114,7 @@ void* tutor_behavior(void* arg) {
         printf("Tutor says , \" There are two students , tutoring for %d minutes . \"\n", tutoringTime);
         sleep(tutoringTime);
 
-        printf("tutor says , \" Tutoring done ! \"\n");
+        printf("Tutor says , \" Tutoring done ! \"\n");
 
         sem_post(&studentDone[student1]);
         sem_post(&studentDone[student2]);
